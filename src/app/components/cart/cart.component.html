@@ -1,0 +1,43 @@
+<app-navbar />
+
+<div class="container my-5">
+  <h1 class="mt-4">Cart</h1>
+  <div class="d-flex" *ngIf="!cartProducts || cartProducts.length === 0">
+    <p class="fs-2 mb-2">Cart is empty</p>
+    <a routerLink="/home" class="btn btn-primary mb-2 mt-1 p-2 ms-3"
+      >Explore More..</a
+    >
+  </div>
+
+  <div>
+    <table class="table table-borderless rounded">
+      <thead>
+        <tr>
+          <th scope="col">Preview</th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total Price</th>
+          <!-- <th scope="col">Delete Product</th> -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let cartProd of cartProducts" class="text-start">
+        <td scope="col">
+          <img [src]="cartProd.image" style="height: 100px; width: 100px" />
+        </td>
+        <td scope="col">{{ cartProd.title }}</td>
+        <td scope="col">₹{{ cartProd.price }}</td>
+        <td scope="col" class="text-center me-5">{{ cartProd.count }}</td>
+        <td scope="col" class="text-center">₹{{ cartProd.price * cartProd.count! }}</td>
+      </tbody>
+    </table>
+    <p class="fs-5" style="margin-left: 900px">
+      Total-₹{{ getTotalPrice() | number : "1.2-2" }}
+    </p>
+    <div style="margin-left: 900px">
+      <button class="btn btn-primary" (click)="checkoutHandler()">
+        Checkout
+      </button>
+    </div>
+  </div>
+</div>

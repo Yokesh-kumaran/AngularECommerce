@@ -1,0 +1,153 @@
+<div
+  class="container-fluid"
+  style="
+    background-image: linear-gradient(
+      to right,
+      rgb(6, 139, 241),
+      rgb(7, 228, 240),
+      rgb(12, 234, 164)
+    );
+    height: 100vh;
+    width: 100%;
+  "
+>
+  <div class="row pt-4">
+    <div class="col"></div>
+    <div
+      class="col-6 p-5 bg-light bg-gradient bg-opacity-75 border border-2 border border-dark rounded"
+    >
+      <h1>Sign Up</h1>
+      <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+        <div class="form-group">
+          <label for="userEmail">Email address</label>
+        </div>
+
+        <div>
+          <input
+            type="email"
+            class="form-control w-100 mb-3"
+            id="userEmail"
+            placeholder="Enter email"
+            ngModel
+            name="email"
+            required
+            email
+            #modelEmail="ngModel"
+            [ngClass]="
+              modelEmail.invalid && modelEmail.dirty ? 'is-invalid' : ''
+            "
+          />
+          <div
+            *ngIf="modelEmail.invalid && modelEmail.dirty"
+            class="invalid-feedback"
+          >
+            Please enter the valid Email
+            <address></address>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="userName">Username</label>
+        </div>
+
+        <div>
+          <input
+            type="text"
+            class="form-control w-100"
+            id="userName"
+            placeholder="Enter username"
+            ngModel
+            name="userName"
+            required
+            minlength="3"
+            #modelName="ngModel"
+            [ngClass]="modelName.invalid && modelName.dirty ? 'is-invalid' : ''"
+          />
+          <div
+            *ngIf="modelName?.errors?.['minlength'] && modelName.dirty"
+            class="invalid-feedback"
+          >
+            Please enter atleast
+            {{modelName?.errors?.['minlength']?.['requiredLength']}} characters
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="userPass">Password</label>
+        </div>
+
+        <div>
+          <input
+            type="password"
+            class="form-control w-100"
+            id="userPass"
+            placeholder="Password"
+            ngModel
+            name="password"
+            required
+            minlength="8"
+            #modelPass="ngModel"
+            [ngClass]="modelPass.errors && modelPass.dirty ? 'is-invalid' : ''"
+          />
+          <div
+            *ngIf="modelPass?.errors?.['minlength'] && modelPass.dirty"
+            class="invalid-feedback"
+          >
+            Please enter atleast
+            {{modelPass?.errors?.['minlength']?.['requiredLength']}} characters
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="userConfirmPass">Confirm password</label>
+        </div>
+
+        <div>
+          <input
+            type="password"
+            class="form-control w-100 mb-2"
+            id="userConfirmPass"
+            placeholder="Password"
+            ngModel
+            name="confirmPassword"
+            required
+            minlength="8"
+            #modelConfirmPass="ngModel"
+            [ngClass]="
+              modelPass.value !== modelConfirmPass &&
+              modelConfirmPass.dirty &&
+              modelConfirmPass.invalid
+                ? 'is-invalid'
+                : ''
+            "
+          />
+          <div
+            *ngIf="
+              modelPass.value !== modelConfirmPass
+            "
+            class="invalid-feedback"
+          >
+            Password must be same
+          </div>
+        </div>
+
+        <div>
+          <p class="para">
+            Already an user!!<a routerLink="/login">Sign in</a>
+          </p>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary mb-0 w-100"
+          [disabled]="
+            registerForm.invalid || modelPass.value !== modelConfirmPass.value
+          "
+          routerLink="/login"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

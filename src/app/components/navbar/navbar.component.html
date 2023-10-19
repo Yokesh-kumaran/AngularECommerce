@@ -1,0 +1,31 @@
+<nav
+  class="navbar navbar-expand-lg"
+  style="background-color: rgb(249, 247, 247)"
+>
+  <div class="container-fluid">
+    <a class="logo" routerLink="/home" style="cursor: pointer">
+      <img
+        src="https://image.similarpng.com/very-thumbnail/2020/11/Online-shop-logo-template-premium-vector-PNG.png"
+        alt="image"
+        width="70"
+        height="70"
+        class="d-inline-block align-text-top"
+      />
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="navbar-nav">
+      <p class="mt-2" style="width: 70px">
+        <a class="nav-link" routerLink="/cart" routerLinkActive="active"
+          >Cart {{ getCount() > 0 ? getCount() : "" }}</a
+        >
+      </p>
+
+    </div>
+    <a class="logout">
+      <button type="button" class="btn btn-danger me-2" (click)="logout()">
+        Logout
+      </button>
+    </a>
+  </div>
+</nav>

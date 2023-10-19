@@ -1,0 +1,97 @@
+<div
+  class="container-fluid"
+  style="
+    background-image: linear-gradient(
+      to right,
+      rgb(6, 139, 241),
+      rgb(7, 228, 240),
+      rgb(12, 234, 164)
+    );
+    height: 100vh;
+    width: 100%;
+  "
+>
+  <div class="row p-4">
+    <div class="col"></div>
+    <form
+      (ngSubmit)="onSubmit(loginForm)"
+      #loginForm="ngForm"
+      class="col-6 p-5 bg-light bg-gradient bg-opacity-75 border border-2 border border-dark rounded"
+      style="margin-top: 60px"
+    >
+      <h1>Sign In</h1>
+
+      <div class="form-outline">
+        <label for="email">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control w-100"
+          id="email"
+          placeholder="Enter email"
+          ngModel
+          required
+          email
+          #modelEmail="ngModel"
+          [ngClass]="modelEmail.invalid && modelEmail.dirty ? 'is-invalid' : ''"
+        />
+        <div
+          *ngIf="modelEmail.invalid && modelEmail.dirty"
+          class="invalid-feedback"
+        >
+          Please Enter a valid Email address
+        </div>
+      </div>
+
+      <div class="form-outline mt-3">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control w-100 mb-2"
+          id="password"
+          placeholder="Password"
+          ngModel
+          required
+          minlength="3"
+          password
+          #modelPassword="ngModel"
+          [ngClass]="
+            modelPassword.invalid && modelPassword.dirty ? 'is-invalid' : ''
+          "
+        />
+
+        <div
+          *ngIf="modelPassword.errors?.['required'] && modelPassword.dirty"
+          class="invalid-feedback"
+        >
+          Please Enter a valid password
+        </div>
+        <div
+          *ngIf="modelPassword?.errors?.['minlength']"
+          class="invalid-feedback"
+        >
+          Please enter atleast
+          {{modelPassword?.errors?.['minlength']?.['requiredLength']
+          }}
+          characters.
+        </div>
+      </div>
+
+      <div class="text-danger" *ngIf="error.length > 0">{{ error }}</div>
+
+      <div>
+        <p class="para">New user!!<a routerLink="/register">Sign up</a></p>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="btn btn-primary w-100"
+      >
+        Submit
+      </button>
+    </form>
+    <div class="col"></div>
+  </div>
+</div>
